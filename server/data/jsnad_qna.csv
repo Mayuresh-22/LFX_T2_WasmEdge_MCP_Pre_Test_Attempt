@@ -1,0 +1,54 @@
+question,answer,topic,difficulty_level
+"How do you create a Buffer from a string using UTF-8 encoding?","Use Buffer.from() method: ```code const buf = Buffer.from('Hello', 'utf8');```",Buffer and Streams,Easy
+"What's the difference between spawn() and exec() in child processes?","spawn() streams I/O, while exec() buffers output. exec() creates a shell by default.",Child Processes,Medium
+"How would you handle uncaught exceptions in Node.js?","Use process.on('uncaughtException', (err) => { /* handle */ }) but avoid restarting the process immediately.",Error Handling,Hard
+"What CLI flag enables ES module support in Node.js?","```--experimental-modules``` (Note: Later versions enable by default)",Node.js CLI,Easy
+"How do you create a Readable stream that emits 'data' events?","```code const { Readable } = require('stream'); const readable = Readable.from(['data']);```",Buffer and Streams,Medium
+"What's the purpose of util.promisify?","Converts callback-style functions to Promise-based: ```code const promisified = promisify(fs.readFile);```",Control Flow,Medium
+"How would you implement an EventEmitter that emits 'error' events?","Extend EventEmitter class and emit errors: ```code class MyEmitter extends EventEmitter { /* ... */ }```",Events,Medium
+"What's the difference between readFile() and createReadStream()?","readFile() loads entire file into memory, createReadStream() reads incrementally.",File System,Medium
+"How do you validate package.json dependencies' versions?","Use exact (1.2.3), caret (^1.2.3), or tilde (~1.2.3) version specifiers.",Package.json,Easy
+"What assert method checks deep object equality?","assert.deepStrictEqual(): ```code assert.deepStrictEqual(obj1, obj2);```",Unit Testing,Easy
+"How do you get system memory info in Node.js?","Use os.totalmem() and os.freemem(): ```code const total = os.totalmem();```",Process/Operating System,Easy
+"What's the difference between setImmediate() and process.nextTick()?","nextTick() runs before event loop phases, setImmediate() after I/O phase.",Control Flow,Hard
+"How would you convert a stream to a promise?","Use pipeline() with finished(): ```code await finished(stream);```",Buffer and Streams,Hard
+"What's the purpose of __dirname in CommonJS?","Returns directory path of current module. Not available in ES modules.",Module system,Easy
+"How do you watch for file changes using fs module?","Use fs.watch(): ```code fs.watch('file.txt', (event, filename) => {});```",File System,Medium
+"What's the default maximum number of event listeners?","10 per EventEmitter instance. Modify with emitter.setMaxListeners(n).",Events,Medium
+"How do you parse query strings in Node.js?","Use querystring module: ```code const parsed = querystring.parse('a=1');```",JavaScript Prerequisites,Easy
+"What's the purpose of worker_threads module?","Enables parallel JavaScript execution using threads with isolated heaps.",Child Processes,Hard
+"How do you test async code with assert.rejects?","```code await assert.rejects(asyncFn(), { message: 'Expected error' });```",Unit Testing,Medium
+"What's the difference between exports and module.exports?","exports is shorthand reference; module.exports is the actual exported object.",Module system,Medium
+"How do you create a writable stream?","Implement _write() method: ```code const writable = new Writable({ write() {} });```",Buffer and Streams,Medium
+"What's the purpose of NODE_OPTIONS environment variable?","Sets CLI options: ```code NODE_OPTIONS='--max-old-space-size=4096'```",Node.js CLI,Medium
+"How do you handle EMFILE errors from too many open files?","Use graceful-fs module or implement queueing system for file operations.",Error Handling,Hard
+"What's the output of Buffer.byteLength('€') in UTF-8?","3 bytes (Unicode character U+20AC)",Buffer and Streams,Medium
+"How do you create a child process that shares no memory?","Use spawn(): ```code const { spawn } = require('child_process'); spawn('ls');```",Child Processes,Easy
+"What's the purpose of --inspect CLI flag?","Starts V8 inspector for debugging: ```node --inspect script.js```",Diagnostics,Easy
+"How do you convert callback-based function to async/await?","Wrap in Promise: ```code const result = await new Promise((resolve, reject) => {...});```",Control Flow,Medium
+"What's the difference between cluster and worker_threads?","cluster uses processes, worker_threads uses threads within same process.",Child Processes,Hard
+"How do you read environment variables?","Use process.env: ```code const port = process.env.PORT || 3000;```",Process/Operating System,Easy
+"What's the purpose of zlib.createGzip()?","Creates gzip compression transform stream: ```code input.pipe(createGzip()).pipe(output);```",Buffer and Streams,Medium
+"How do you validate certificate chain in HTTPS?","Use checkServerIdentity option or NODE_EXTRA_CA_CERTS env variable.",Security,Hard
+"What's the output of path.join('/foo', 'bar', 'baz/asdf', 'quux')?","/foo/bar/baz/asdf/quux (normalizes path separators)",File System,Easy
+"How do you create HTTP server with async handler?","Use async listener: ```code server.on('request', async (req, res) => {...});```",Control Flow,Medium
+"What's the purpose of util.inspect()?","Returns string representation of object for debugging: ```code util.inspect(obj)```",Diagnostics,Easy
+"How do you prevent prototype pollution in objects?","Use Object.create(null) or Object.freeze(Object.prototype).",Security,Hard
+"What's the difference between exports and module.exports circular refs?","module.exports handles circular references better than exports shortcut.",Module system,Hard
+"How do you measure function execution time?","Use console.time(): ```code console.time('label'); ... console.timeEnd('label');```",Diagnostics,Easy
+"What's the purpose of --trace-warnings flag?","Prints stack traces for process warnings: ```node --trace-warnings script.js```",Diagnostics,Medium
+"How do you implement backpressure handling in streams?","Check write() return value or use pipeline(): ```code pipeline(source, dest);```",Buffer and Streams,Hard
+"What's the purpose of vm module?","Executes code in isolated contexts: ```code vm.runInNewContext('x += 1', { x: 2 });```",Advanced APIs,Hard
+"How do you validate JSON schema?","Use ajv or similar library: ```code const validate = ajv.compile(schema);```",Unit Testing,Medium
+"What's the output of os.platform() on Windows?","'win32' (even on 64-bit systems)",Process/Operating System,Easy
+"How do you create promise-based timers?","Use timers/promises: ```code import { setTimeout } from 'timers/promises';```",Control Flow,Medium
+"What's the purpose of NODE_ENV variable?","Identifies environment (development/production): ```process.env.NODE_ENV```",Package.json,Easy
+"How do you handle ECONNRESET errors?","Implement socket error handlers: ```code socket.on('error', (err) => {...});```",Error Handling,Hard
+"What's the difference between require() and import?","require() is synchronous CommonJS, import is asynchronous ES modules.",Module system,Medium
+"How do you implement custom REPL commands?","Use replServer.defineCommand(): ```code repl.defineCommand('cmd', {...});```",REPL,Hard
+"What's the purpose of --abort-on-uncaught-exception?","Terminates process immediately with core dump on uncaught exception.",Error Handling,Medium
+"How do you parse command-line arguments?","Use process.argv or libraries like yargs: ```code const args = process.argv.slice(2);```",Node.js CLI,Easy
+"What's the output of path.resolve('../a', '/b')?","/b (absolute paths override previous segments)",File System,Medium
+"How do you implement request timeout handling?","Use setTimeout(): ```code req.setTimeout(5000, () => req.destroy());```",HTTP,Medium
+"What's the purpose of perf_hooks module?","Measures performance metrics: ```code const { performance } = require('perf_hooks');```",Diagnostics,Medium
+"How do you validate callback parameters?","Use assert.throws(): ```code assert.throws(() => { callbackErr(); }, Error);```",Unit Testing,Medium
