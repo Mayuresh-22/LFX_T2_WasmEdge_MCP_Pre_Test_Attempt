@@ -80,8 +80,8 @@ Your goal is to maximize the user's exam readiness by leveraging the tools and y
         
         # Initialize the LLM client (eg. any openai compatible LLM provider)
         self.llm = openai.Client(
-            api_key=os.getenv("GROQ_API_KEY"),
-            base_url="https://api.groq.com/openai/v1",
+            api_key=os.getenv("MODEL_API_KEY"),
+            base_url=os.getenv("MODEL_BASE_URL"),
         )
 
     async def eval_tools(self, tool_calls):
