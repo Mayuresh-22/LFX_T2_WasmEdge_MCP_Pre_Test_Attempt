@@ -1,0 +1,17 @@
+[project]
+name = "LF-Certification-Preparation-AI"
+version = "0.1.0"
+description = "LF Certification Preparation AI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.9.0",
+    "openai>=1.79.0",
+    "google-genai>=1.16.1",
+    "mcp[cli]>=1.9.0",
+    "pandas>=2.2.3",
+    "sqlite-vec>=0.1.6",
+]
+
+[tool.uv.workspace]
+members = ["server"]
