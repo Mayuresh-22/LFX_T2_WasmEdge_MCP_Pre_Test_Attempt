@@ -3,13 +3,6 @@
 ## About
 This is a pre-test attempt for the LFX mentorship program, specifically for the "Create an MCP-based AI agent to help LF certificate preparation" [[1]](https://github.com/WasmEdge/WasmEdge/issues/4109#issue-3055274339).
 
-## Screenshots
-
-![image](https://github.com/user-attachments/assets/5d72e78a-3cef-4a1a-b41f-56da162ed4b6)
-
-![image](https://github.com/user-attachments/assets/c71c534c-ae7f-474c-9dff-0f6a3a5dd62b)
-
-
 ## Project Features
 - **Modular design**: The project is designed to be modular, allowing for easy addition of new MCP servers and tools.
 - **Semantic question search**: Rather than using traditional keyword search, the project uses semantic search to find relevant questions. This is done using the gemini's `text-embedding-004` [[2]](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding) text embedding model and `sqlite3` db with `sqlite_vec` [[3]](https://github.com/asg017/sqlite-vec) extension to store the vectors.
@@ -19,8 +12,36 @@ This is a pre-test attempt for the LFX mentorship program, specifically for the 
 **Goal**: To create an AI agent that can assist in preparing LF certificates using MCP (Model Context Protocol) [[5]](https://docs.anthropic.com/en/docs/agents-and-tools/mcp).
 
 **Objective**: 
-- To demonstrate the ability to create an AI agents capable of handling external tools via MCP.
+- To demonstrate the ability to create an AI agent capable of handling external tools via MCP.
 - To demonstrate the understanding of topics like MCP, AI agents, and tool usage.
+
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/5d72e78a-3cef-4a1a-b41f-56da162ed4b6)
+
+![image](https://github.com/user-attachments/assets/c71c534c-ae7f-474c-9dff-0f6a3a5dd62b)
+
+## Architecture Diagram
+```mermaid
+flowchart TD
+    User([User])
+    Client([Client])
+    LLM([LLM API Server])
+    MCP([MCP Server])
+    DB[(SQLite DB<br/>+ Embeddings)]
+    CSV[[Q&A Dataset]]
+
+    User -- types query --> Client
+    Client -- prompt & tool schema --> LLM
+    LLM -- tool call --> Client
+    Client -- tool call --> MCP
+    MCP -- semantic search --> DB
+    DB -- loads from --> CSV
+    MCP -- tool result --> Client
+    Client -- tool result --> LLM
+    LLM -- answer --> Client
+    Client -- displays --> User
+```
 
 ## How to run
 It's very simple to get things up and running. Just follow the steps below:
