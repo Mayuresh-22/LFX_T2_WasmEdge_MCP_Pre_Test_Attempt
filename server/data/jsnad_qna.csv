@@ -52,3 +52,54 @@ question,answer,topic,difficulty_level
 "How do you implement request timeout handling?","Use setTimeout(): ```code req.setTimeout(5000, () => req.destroy());```",HTTP,Medium
 "What's the purpose of perf_hooks module?","Measures performance metrics: ```code const { performance } = require('perf_hooks');```",Diagnostics,Medium
 "How do you validate callback parameters?","Use assert.throws(): ```code assert.throws(() => { callbackErr(); }, Error);```",Unit Testing,Medium
+"How do you convert a Buffer to JSON?","Use buf.toJSON(): ```code const json = buf.toJSON();``` Returns { type: 'Buffer', data: [ ... ] }",Buffer and Streams,Easy
+"What's the purpose of stream.pipeline()?","Handles cleanup and backpressure automatically: ```code pipeline(readable, transform, writable, err => {});```",Buffer and Streams,Hard
+"How would you prevent event emitter memory leaks?","Set max listeners: ```code emitter.setMaxListeners(20);``` or handle 'removeListener' events",Events,Medium
+"What CLI flag shows pending deprecations?","```--pending-deprecation``` Shows warnings for upcoming API removals",Node.js CLI,Medium
+"How do you create a duplex stream?","Implement both _read() and _write(): ```code const duplex = new Duplex({ read() {}, write() {} });```",Buffer and Streams,Hard
+"What's the difference between process.exit() and process.kill()?","exit() terminates gracefully, kill() sends OS signal immediately",Process/Operating System,Medium
+"How would you implement a custom REPL?","Use repl.start(): ```code const repl = require('repl'); repl.start('> ');```",Advanced APIs,Hard
+"What's the output of Buffer.isBuffer(new Uint8Array())?","false - Uint8Array isn't a Node.js Buffer instance",Buffer and Streams,Easy
+"How do you handle ECONNREFUSED errors?","Implement retry logic with exponential backoff in socket error handlers",Error Handling,Hard
+"What's the purpose of util.types.isUint8Array()?","Checks if value is Uint8Array: ```code util.types.isUint8Array(new Uint8Array()); // true```",Diagnostics,Medium
+"How would you validate JSON with JSON Schema?","Use ajv library: ```code const validate = new Ajv().compile(schema);```",Unit Testing,Medium
+"What's the difference between readdir and readdirSync?","readdir is async with callback, readdirSync is blocking",File System,Easy
+"How do you create a writable stream for HTTP response?","Pipe directly: ```code readable.pipe(res);```",HTTP,Medium
+"What's the purpose of os.cpus()?","Returns array of CPU core info: ```code os.cpus().length```",Process/Operating System,Easy
+"How would you mock fs.readFile in Jest?","```code jest.mock('fs').readFile.mockImplementation((path, cb) => cb(null, 'mock'));```",Unit Testing,Hard
+"What's the difference between .mjs and .cjs extensions?",".mjs forces ES modules, .cjs forces CommonJS regardless of package.json",Module system,Medium
+"How do you profile heap memory usage?","Use v8.getHeapSnapshot() or --heapsnapshot-signal flag",Diagnostics,Hard
+"What's the purpose of process.emitWarning()?","Emits custom process warnings: ```code process.emitWarning('Custom alert');```",Error Handling,Medium
+"How would you implement a Promise queue?","Use async/await with array shift/push: ```code while (queue.length) await queue.shift()();```",Control Flow,Hard
+"What's the output of path.parse('/home/user/file.txt')?","{ root: '/', dir: '/home/user', base: 'file.txt', ext: '.txt', name: 'file' }",File System,Easy
+"How do you handle SIGTERM signals?","```code process.on('SIGTERM', () => { /* cleanup */ });```",Process/Operating System,Medium
+"What's the purpose of NODE_DEBUG env variable?","Enables core module debugging: ```NODE_DEBUG=fs,http node app.js```",Diagnostics,Medium
+"How would you convert CJS to ESM in Node.js?","Set type: 'module' in package.json and use .mjs extensions",Module system,Hard
+"What's the difference between dgram and net modules?","dgram for UDP, net for TCP sockets",Network,Medium
+"How do you test process.exit() with Jest?","```code expect(() => process.exit(1)).toThrow('process.exit');``` Requires --detectOpenHandles",Unit Testing,Hard
+"What's the purpose of worker_threads.isMainThread?","Checks if code runs in main thread: ```code worker_threads.isMainThread```",Child Processes,Hard
+"How would you implement a recursive file watcher?","Use fs.watch() with { recursive: true } option",File System,Medium
+"What's the output of util.inspect([1,2,3])?","'[ 1, 2, 3 ]' - Array string representation",Diagnostics,Easy
+"How do you prevent prototype pollution in JSON.parse?","Use reviver function to sanitize input",Security,Hard
+"What's the difference between os.totalmem() and os.freemem()?","totalmem=all RAM, freemem=available RAM",Process/Operating System,Easy
+"How would you mock Date.now() in tests?","```code jest.spyOn(Date, 'now').mockReturnValue(1622505600000);```",Unit Testing,Medium
+"What's the purpose of http.Agent?","Manages connection persistence/reuse for HTTP clients",HTTP,Hard
+"How do you handle EPIPE errors in streams?","Implement 'error' listener and recreate stream",Error Handling,Hard
+"What's the difference between path.resolve and path.join?","resolve() returns absolute path, join() just concatenates",File System,Medium
+"How would you implement a rate limiter?","Use token bucket algorithm with timers",Control Flow,Hard
+"What's the purpose of --trace-sync-io flag?","Flags synchronous operations in event loop phases",Diagnostics,Hard
+"How do you test event emitters with Jest?","```code const mockFn = jest.fn(); emitter.on('event', mockFn); expect(mockFn).toHaveBeenCalled();```",Unit Testing,Medium
+"What's the output of querystring.parse('a=1&b=2')?","{ a: '1', b: '2' } - Parsed query object",JavaScript Prerequisites,Easy
+"How would you prevent ZIP bomb attacks?","Implement file size limits and stream validation",Security,Hard
+"What's the purpose of util.TextDecoder?","Converts Buffer to string: ```code new TextDecoder().decode(buffer);```",Buffer and Streams,Medium
+"How do you handle ENFILE (file table overflow)?","Implement queueing system with graceful-fs",Error Handling,Hard
+"What's the difference between spawnSync and execSync?","spawnSync returns buffers, execSync returns string by default",Child Processes,Medium
+"How would you implement JWT verification?","Use jsonwebtoken library with public key",Security,Hard
+"What's the purpose of perf_hooks.performance.now()?","High-resolution timestamps: ```code performance.now() // 3572.645318```",Diagnostics,Medium
+"How do you test stream backpressure handling?","Create highWaterMark limits and check write() return values",Buffer and Streams,Hard
+"What's the difference between __dirname and import.meta.url?","__dirname in CJS, import.meta.url in ESM",Module system,Medium
+"How would you implement a circuit breaker pattern?","Track failures and open circuit after threshold",Error Handling,Hard
+"What's the purpose of cluster.isMaster?","True in primary process: ```code cluster.isMaster```",Child Processes,Hard
+"How do you parse multipart/form-data?","Use busboy library or implement stream parser",HTTP,Hard
+"What's the output of crypto.randomBytes(8).toString('hex')?","16-character hex string (8 bytes * 2)",Security,Medium
+"How would you mock process.env in Jest?","```code jest.spyOn(process, 'env', 'get').mockReturnValue('test');```",Unit Testing,Medium
