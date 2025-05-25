@@ -45,16 +45,20 @@ class MCPServer:
             question_embedding = question_embedding[0].values
             
             result = self.cursor.execute(
-                "SELECT question, answer, vec_distance_L2(embedding, vec_f32(?)) as score FROM questions ORDER BY score LIMIT 1",
+                "SELECT question, answer, topic, diff_level, vec_distance_L2(embedding, vec_f32(?)) as score FROM questions ORDER BY score LIMIT 1",
                 (str(question_embedding),)
             ).fetchall()
             if not result:
                 raise ValueError("No matching question found")
 
-            if result[0][2] > 0.6:
+            if result[0][4] > 0.6:
                 raise ValueError("No matching question found")
 
-            return {"question": result[0][0], "answer": result[0][1], "score": result[0][2]}
+            return {"question": result[0][0], 
+                    "answer": result[0][1], 
+                    "topic": result[0][2], 
+                    "diff_level": result[0][3],
+                    "score": result[0][4]}
         except ValueError as e:
             return {"error": str(e)}
 
@@ -72,5 +76,5 @@ if __name__ == "__main__":
                  "get_question_answer",
                  """The function searches an input text from the database
                  for a corresponding question and answer. Result: {
-                 question: str, answer: str, score: float}""")
+                 question: str, answer: str, topic: str, diff_level: str, score: float}""")
     mcp.run(transport="stdio")
