@@ -41,7 +41,7 @@ def init(cursor: Cursor) -> bool:
         df = df.dropna()
         dataset: list = df.to_records(index=False).tolist()
 
-        questions = [row[0] for row in dataset]
+        questions = [f"Topic {row[2]}: {row[0]}" for row in dataset]
         embeddings = get_embedding(questions)
 
         for row, embedding in zip(dataset, embeddings):
