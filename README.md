@@ -9,6 +9,12 @@ This is a pre-test attempt for the LFX mentorship program, specifically for the 
 - **Easy model switching**: The project allows for easy switching between different models (remote & local), simply by updating the environment variables. Supports `LlamaEdge API server` [[4]](https://llamaedge.com/docs/user-guide/llm/full-openai).
 - **Custom dataset**: The project uses a custom dataset of questions and answers, which is stored in a sqlite3 database. The `jsnad_qna.csv` dataset is sample dataset created for [OpenJS Node.js Application Developer (JSNAD)](https://training.linuxfoundation.org/certification/jsnad/) exam. It is copyright compliant as it is generated using frontier models.
 
+**Goal**: To create an AI agent that can assist in preparing LF certificates using MCP (Model Context Protocol) [[5]](https://docs.anthropic.com/en/docs/agents-and-tools/mcp).
+
+**Objective**: 
+- To demonstrate the ability to create an AI agent capable of handling external tools via MCP.
+- To demonstrate the understanding of topics like MCP, AI agents, and tool usage.
+
 ## Dockerized LlamaEdge Server (Optional Local LLM)
 
 For running a local LLM with tool-calling capabilities, a pre-built Docker image for the LlamaEdge API server featuring the Meta Llama 3.2 3B Instruct model is available on Docker Hub:
@@ -28,12 +34,6 @@ docker run -d -p 8080:8080 --name llamaedge-server-3b mayureshdev/llama-3.2-3b:l
 The API will then be available at `http://localhost:8080`. You can configure the `LLM_API_BASE_URL` in your `.env.local` file to `http://localhost:8080/v1` and `LLM_MODEL` to `Llama-3.2-3b` (or as defined by the server) to use this local LLM.
 
 Detailed instructions for building this and other LlamaEdge Docker images (e.g., for Llama 3.1 8B) can be found in the [`llamaedge/README.md`](./llamaedge/README.md) directory.
-
-**Goal**: To create an AI agent that can assist in preparing LF certificates using MCP (Model Context Protocol) [[5]](https://docs.anthropic.com/en/docs/agents-and-tools/mcp).
-
-**Objective**: 
-- To demonstrate the ability to create an AI agent capable of handling external tools via MCP.
-- To demonstrate the understanding of topics like MCP, AI agents, and tool usage.
 
 ## Screenshots
 
